@@ -67,7 +67,7 @@ def train(x, y):
 
 
 if __name__ == '__main__':
-    data = pd.read_csv('C:/Users/PCu/Data/data_logistic_1.csv').dropna()
+    data = pd.read_csv('data.csv').dropna()
     x = data.iloc[:, :-1].to_numpy()
     y = data.iloc[:, -1].to_numpy()
     train(x, y)
