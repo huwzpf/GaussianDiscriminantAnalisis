@@ -42,13 +42,8 @@ def train(x, y):
     y_neg = k = np.array([0 if a == 1 else 1 for a in labels]).reshape(n, 1)
     temp = labels * (x - mean_positive) + y_neg * (x - mean_negative)
     covariance = (np.transpose(temp).dot(temp))/n
-    # print(np.linalg.inv(covariance))
     for i in range(n):
-
-        pos = prob_x_given_y(x[i, :].reshape(x.shape[1], 1), mean_positive.reshape(x.shape[1], 1), covariance) * class_prior
-        neg = prob_x_given_y(x[i, :].reshape(x.shape[1], 1), mean_negative.reshape(x.shape[1], 1), covariance) * (1-class_prior)
-        print(f"y : {labels[i]} prediction: positive: {pos} negative: {neg}")
-        if(pos > neg):
+        if labels[i] == 0:
             color = '#ff2200'
         else:
             color = '#1f77b4'
@@ -67,8 +62,6 @@ def train(x, y):
             p[i, j] = predict(k.reshape(x.shape[1], 1), mean_positive.reshape(x.shape[1], 1),
                               mean_negative.reshape(x.shape[1], 1), covariance, class_prior)
     plt.contour(x_grid, y_grid, p, levels=[0.5])
-
-
     plt.show()
 
 
